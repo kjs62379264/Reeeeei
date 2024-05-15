@@ -38,22 +38,22 @@ function Navbar() {
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                 <li className='nav-item'>
                     <Link to='/' className='nav-links' onClick={closeMobileMenu}>
-                        Home
+                        홈
                     </Link>
                 </li>
                 <li className='nav-item'>
                     <Link to='/services' className='nav-links' onClick={closeMobileMenu}>
-                        Services
+                        서비스
                     </Link>
                 </li>
                 <li className='nav-item'>
                     <Link to='/products' className='nav-links' onClick={closeMobileMenu}>
-                        Products
+                        길찾기?
                     </Link>
                 </li>
                 <li className='nav-item'>
                     <Link to='/sign-up' className='nav-links-mobile' onClick={closeMobileMenu}>
-                        Sign-up
+                        회원가입
                     </Link>
                 </li>
             </ul>

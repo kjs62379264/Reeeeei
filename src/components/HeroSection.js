@@ -7,22 +7,22 @@ function HeroSection() {
   return (
     <div className='hero-container'>
         <video src='/videos/video-2.mp4' autoPlay loop muted />
-        <h1>ADVENTURE AWAITS</h1>
-        <p>What are you waiting for?</p>
+        <h1>여행 길찾기</h1>
+        <p>편한 여행길 도와드립니다</p>
         <div className='hero-btns'>
             <Button 
               className='btns' 
               buttonStyle='btn--outline'
               buttonSize='btn--large'
             >
-              Get Started
+              시작
             </Button>
             <Button 
               className='btns' 
               buttonStyle='btn--primary'
               buttonSize='btn--large'
             >
-              WATCH TRAILER <i className='far fa-play-circle'/>
+              로그인 
             </Button>
         </div>
     </div>
