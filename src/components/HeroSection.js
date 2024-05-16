@@ -17,13 +17,7 @@ function HeroSection() {
             >
               시작
             </Button>
-            <Button 
-              className='btns' 
-              buttonStyle='btn--primary'
-              buttonSize='btn--large'
-            >
-              로그인 
-            </Button>
+            
         </div>
     </div>
   )
