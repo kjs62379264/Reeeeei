@@ -52,7 +52,7 @@ function Footer() {
             <div className="social-media-wrap">
                 <div className="footer-logo">
                     <Link 새='/' className="social-logo">
-                        여행길<i className="fab fa-typo3"></i>
+                        여행길<i className="fa-solid fa-city"></i>
                     </Link>
                 </div>
                 <small className="website-rights">캡스톤 2024</small>
