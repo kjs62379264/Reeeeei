@@ -11,6 +11,7 @@ function HeroSection() {
         <p>편한 여행길 도와드립니다</p>
         <div className='hero-btns'>
             <Button 
+              to="/services"
               className='btns' 
               buttonStyle='btn--outline'
               buttonSize='btn--large'
