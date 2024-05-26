@@ -25,7 +25,7 @@ function Footer() {
             <div className="footer-link-wrapper">
                 <div className="footer-links-items">
                     <h2>About Us</h2>
-                    <Link to='/sign-up'>How it works</Link>
+                    <Link to='/'>How it works</Link>
                     <Link to='/'>증명서</Link>
                     <Link to='/'>Careers</Link>
                     <Link to='/'>만든사람들</Link>
