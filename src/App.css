@@ -6,7 +6,6 @@
   }
   
   .home,
-  .services,
   .products,
   .sign-up {
     display: flex;
@@ -17,52 +16,59 @@
   }
   
   .services {
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    color: #242424;
+    display: flex;
     font-size: 1.5rem;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 20px;
-    max-width: 800px;
+    max-width: 100%;
     margin: auto;
+    text-align: center;
   }
   
-  .services .content {
+  .services-item{
+    margin-bottom: 40px;
+    width: 100%;
+  }
+
+  .services .info-row{
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+    width: 100%;
+    align-items: center;
     justify-content: space-between;
   }
 
   .services .image {
-    width: 50%;
+    width: 20%;
     height: auto;
-    margin-right: 20px;
   }
 
   .services .info-container {
-    width: 50%;
+    width: 75%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    padding-left: 20px;
   }
 
   .services .introduction {
     font-size: 16px;
     line-height: 1.5;
     margin: 20px;
+    text-align: left;
   }
 
   .services .details {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
   }
   
   .services .info-box {
     background: #f4f4f4;
     padding: 10px;
-    margin-bottom: 10px;
     border-radius: 5px;
+    width: 48%;
   }
   
   .products {
