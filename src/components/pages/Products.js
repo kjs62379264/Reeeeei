@@ -25,16 +25,18 @@ const MapComponent = () => {
   };
 
   return (
-    <LoadScript googleMapsApiKey="AIzaSyAURuq6uSAKHb9jc7qkfAu6J7KwB9c01Kc">
+    <LoadScript googleMapsApiKey="AIzaSyD-VpgMKenmUfQvZu2QNVK7CbjSfIBo_h0">
       <GoogleMap
-        mapContainerStyle={{ width: '1000px', height: '1000px' }}
+        mapContainerStyle={{ width: '100vw', height: '100vh' }}
         center={{ lat: 37.5665, lng: 126.9780 }}
         zoom={10}
         onLoad={map => mapRef.current = map}
       >
         {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
       </GoogleMap>
-      <button onClick={fetchDirections}>경로 탐색</button>
+      <div className='button-container'>
+        <button className='mapbutton' onClick={fetchDirections}>경로 탐색</button>
+      </div>
     </LoadScript>
   );
 };

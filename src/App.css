@@ -80,3 +80,34 @@
     color: #242424;
     font-size: 100px;
   }
+
+  .mapbutton {
+    padding: 10px 20px;
+    background-color: #4CAF50; /* 녹색 테마 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 25px;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .mapbutton:hover {
+    background-color: #45a049; /* 버튼 호버 시 조금 더 진한 녹색 */
+    transform: scale(1.05); /* 버튼을 조금 크게 */
+  }
+  
+  .mapbutton:focus {
+    outline: none; /* 포커스 아웃라인 제거 */
+    box-shadow: 0 0 5px #4CAF50; /* 포커스 시 그림자 효과 */
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 20px;
+     /* 화면 전체 높이를 사용하여 버튼을 정확히 중앙에 배치 */
+  }
+  
+  
