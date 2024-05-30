@@ -7,7 +7,8 @@
   
   .home,
   .products,
-  .sign-up {
+  .sign-up
+  .mappings {
     display: flex;
     height: 90vh;
     align-items: center;
@@ -37,6 +38,8 @@
     width: 100%;
     align-items: center;
     justify-content: space-between;
+    border: 1px solid #242424;
+    margin-bottom: 20px;
   }
 
   .services .image {
@@ -57,11 +60,13 @@
     line-height: 1.5;
     margin: 20px;
     text-align: left;
+    margin-top: 1px;
   }
 
   .services .details {
     display: flex;
     justify-content: space-between;
+    font-size: 16px;
   }
   
   .services .info-box {
@@ -80,6 +85,14 @@
   }
   
   .sign-up {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #242424;
+    font-size: 100px;
+  }
+
+  .mappings{
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
