@@ -11,20 +11,24 @@ const MapComponent = () => {
   const mapRef = useRef(null);
   const [originCoords, setOriginCoords] = useState(null); // 출발지 좌표 상태
   const [destinationCoords, setDestinationCoords] = useState(null); // 목적지 좌표 상태
+  const [duration, setDuration] = useState(''); // 소요시간을 저장할 상태
 
   const fetchDirections = () => {
     const directionsService = new window.google.maps.DirectionsService();
     directionsService.route({
       origin: origin,
       destination: destination,
-      travelMode: window.google.maps.TravelMode.DRIVING
+      travelMode: window.google.maps.TravelMode.TRANSIT
     }, (result, status) => {
+      console.log("Status:", status); // 상태 로그 출력
+      console.log("Result:", result); // 결과 로그 출력
       if (status === window.google.maps.DirectionsStatus.OK) {
         setDirectionsResponse(result);
         mapRef.current.fitBounds(result.routes[0].bounds);
         // 저장된 좌표를 사용하여 지도에 마커 설정
         setOriginCoords(result.routes[0].legs[0].start_location);
         setDestinationCoords(result.routes[0].legs[0].end_location);
+        setDuration(result.routes[0].legs[0].duration.text); // 예상 소요시간 저장
       } else {
         console.error(`Error fetching directions ${status}`);
       }
@@ -75,31 +79,45 @@ const MapComponent = () => {
           <button className='mapbutton' onClick={fetchDirections}>경로 탐색</button>
         </div>
       </div>
-      <GoogleMap
-        mapContainerStyle={{ width: '100vw', height: '100vh' }}
-        center={{ lat: 37.5665, lng: 126.9780 }}
-        zoom={12}
-        onLoad={map => mapRef.current = map}
-        onUnmount={() => mapRef.current = null}
-      >
-        {originCoords && (
-          <Marker
-            position={originCoords}
-            icon={{
-              url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+      <div className='map-container'>
+        <GoogleMap
+          mapContainerStyle={{ width: '100%', height: '100%' }}
+          center={{ lat: 37.5665, lng: 126.9780 }}
+          zoom={12}
+          onLoad={map => mapRef.current = map}
+          onUnmount={() => mapRef.current = null}
+        >
+          {originCoords && (
+            <Marker
+              position={originCoords}
+              icon={{
+                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+              }}
+            />
+          )}
+          {destinationCoords && (
+            <Marker
+              position={destinationCoords}
+              icon={{
+                url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+              }}
+            />
+          )}
+          {directionsResponse && (
+            <DirectionsRenderer 
+            directions={directionsResponse}
+            options={{
+              polylineOptions: {
+                strokeColor: "#FF0000", // 빨간색으로 변경
+                strokeOpacity: 0.8,
+                strokeWeight: 6,
+              }
             }}
-          />
-        )}
-        {destinationCoords && (
-          <Marker
-            position={destinationCoords}
-            icon={{
-              url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
-            }}
-          />
-        )}
-        {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
-      </GoogleMap>
+            />
+          )}
+        </GoogleMap>
+        {duration && <div className="duration">예상 소요시간: {duration}</div>} {/* 예상 소요시간 표시 */}
+      </div>
     </LoadScript>
   );
 };
