@@ -26,6 +26,9 @@ const MapComponent = () => {
 
   return (
     <LoadScript googleMapsApiKey="AIzaSyD-VpgMKenmUfQvZu2QNVK7CbjSfIBo_h0">
+      <div className='button-container'>
+        <button className='mapbutton' onClick={fetchDirections}>경로 탐색</button>
+      </div>
       <GoogleMap
         mapContainerStyle={{ width: '100vw', height: '100vh' }}
         center={{ lat: 37.5665, lng: 126.9780 }}
@@ -34,9 +37,6 @@ const MapComponent = () => {
       >
         {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
       </GoogleMap>
-      <div className='button-container'>
-        <button className='mapbutton' onClick={fetchDirections}>경로 탐색</button>
-      </div>
     </LoadScript>
   );
 };
