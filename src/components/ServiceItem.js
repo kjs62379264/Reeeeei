@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ServiceItem = ({ title, image, description, address, phone }) => {
     return (
         <div className="service-item">
-            <h1>{title}</h1>
+            <h3> <Link to='/mappings'>{title}</Link> </h3>
             <div className="info-row">
                 <img 
                     src={image}
