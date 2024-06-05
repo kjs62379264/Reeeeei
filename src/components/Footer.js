@@ -11,7 +11,7 @@ function Footer() {
             <div className="footer-link-wrapper">
                 <div className="footer-links-items">
                     <h2>About Us</h2>
-                    <Link to='/sign-up'>How it works</Link>
+                    <Link to='/'>How it works</Link>
                     <Link to='/'>만든사람들</Link>
                     <Link to='/'>서비스약관</Link>
                 </div>
@@ -29,7 +29,7 @@ function Footer() {
             <div className="social-media-wrap">
                 <div className="footer-logo">
                     <Link 새='/' className="social-logo">
-                        여행길<i className="fa-solid fa-city"></i>
+                        VirtualTrip<i className="fa-solid fa-city"></i>
                     </Link>
                 </div>
                 <small className="website-rights">Team AIM</small>
