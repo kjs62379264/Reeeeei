@@ -29,7 +29,7 @@ function Footer() {
             <div className="social-media-wrap">
                 <div className="footer-logo">
                     <Link 새='/' className="social-logo">
-                        여행길<i className="fa-solid fa-city"></i>
+                        VirtualTrip<i className="fa-solid fa-city"></i>
                     </Link>
                 </div>
                 <small className="website-rights">Team AIM</small>
