@@ -7,7 +7,6 @@
   
   .home,
   .products,
-  .sign-up
   .mappings {
     display: flex;
     height: 90vh;
@@ -79,14 +78,6 @@
   .products {
     background-position: center;
     background-size: fill;
-    background-repeat: no-repeat;
-    color: #242424;
-    font-size: 100px;
-  }
-  
-  .sign-up {
-    background-position: center;
-    background-size: cover;
     background-repeat: no-repeat;
     color: #242424;
     font-size: 100px;

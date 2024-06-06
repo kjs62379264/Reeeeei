@@ -51,19 +51,7 @@ function Navbar() {
                         길찾기
                     </Link>
                 </li>
-                <li className='nav-item'>
-                    <Link to='/sign-up' className='nav-links-mobile' onClick={closeMobileMenu}>
-                        회원가입
-                    </Link>
-                </li>
             </ul>
-            {button && 
-            <Button
-            to = "/sign-up"
-            buttonStyle='btn--outline'
-            >
-                SIGN UP
-            </Button>}
         </div>
     </nav>
    </>
