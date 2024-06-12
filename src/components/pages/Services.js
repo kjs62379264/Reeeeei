@@ -14,12 +14,21 @@ import gaehang from '../images/gaehang.jpg';
 import yanan from '../images/yanan.jpg';
 import inchen from '../images/inchen.jpg';
 import hana from '../images/hana.jpg';
+import hyung from '../images/hyung.jpg';
 
 import ServiceItem from '../ServiceItem';
 
 export default function Services() {
     return (
         <div className="services">
+            <ServiceItem
+                title="서대문 형무소 역사관"
+                image={hyung}
+                description="서대문형무소(西大門刑務所)는 일제 통감부가 식민통치에 저항하는 운동가들을 투옥하기 위해 1907년에 오늘날의 서대문구 지역에 건설하여 1908년 10월에 문을 연 감옥을 가리키는 말이다.
+                역사성과 보존가치 등을 고려하여 일부 시설을 철거한 뒤 나머지 시설들이 1988년 2월 27일에 대한민국의 사적으로 지정되었다. 1998년 11월 5일부터는 서울특별시 서대문구가 관리하는 서대문형무소 역사관으로 재개장하였다."
+                address="서울특별시 서대문구 통일로 251"
+                phone="02-360-8590"    
+            />
             <ServiceItem 
                 title="행주산성"
                 image={haengjusanImage}
