@@ -6,102 +6,137 @@
   <title>Google Maps with Joystick</title>
   <style>
     body, html {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-    }
-    #map {
-      height: 60%;
-      width: 100%;
-    }
-    .controls {
-      position: absolute;
-      bottom: 15px;
-      left: 15px;
-      z-index: 2;
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      width: 17vh;
-      height: 17vh;
-    }
-    .joystick {
-      width: 100%;
-      height: 100%;
-      background: #eee;
-      border-radius: 50%;
-      position: relative;
-      touch-action: none;
-    }
-    .joystick-handle {
-      width: 40%;
-      height: 40%;
-      background: #ccc;
-      border-radius: 50%;
-      position: absolute;
-      top: 30%;
-      left: 30%;
-      touch-action: none;
-    }
-    #info {
-      padding: 10px;
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      margin: 10px;
-      z-index: 2;
-      position: absolute;
-      top: 10px;
-      left: 10px;
-    }
-    #coordinates {
-      padding: 10px;
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      margin: 10px;
-      z-index: 2;
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-    }
-    #image-container {
-      position: absolute;
-      bottom: 21vh;
-      left: 15px;
-      width: 17vh;
-      height: 17vh;
-      z-index: 2;
-      display: none;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    #image {
-      width: 100%;
-      height: 100%;
-      border-radius: 10px;
-    }
-    #button-container {
-      position: absolute;
-      bottom: 15px;
-      right: 15px; /* 조이스틱의 오른쪽에 위치 */
-      z-index: 2;
-      display: flex;
-      gap: 10px; /* 버튼 간격 */
-    }
-    .button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #4285F4;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#map {
+  height: 55%;
+  /* flex: 1; */
+  margin: 15px;
+  border: 2px solid #4285F4;
+  border-radius: 15px;
+}
+
+#controls {
+  position: absolute;
+  bottom: 15px; /* 마진 값만큼 조정 */
+  left: 15px; /* 마진 값만큼 조정 */
+  right: 0px;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 17vh;
+  height: 17vh;
+  transition: all 0.5s ease;
+}
+
+.joystick {
+  width: 100%;
+  height: 100%;
+  background: #eee;
+  border-radius: 50%;
+  position: relative;
+  touch-action: none;
+}
+
+.joystick-handle {
+  width: 40%;
+  height: 40%;
+  background: #ccc;
+  border-radius: 50%;
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  touch-action: none;
+}
+
+#info, #coordinates {
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin: 10px;
+  z-index: 2;
+  position: absolute;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+#coordinates {
+  top: 10px;
+  left: 10px;
+}
+
+#image-container {
+  position: absolute;
+  bottom: 36vh; /* 마진 값만큼 조정 */
+  left: 30px; /* 마진 값만큼 조정 */
+  width: 17vh;
+  height: 17vh;
+  z-index: 2;
+  display: none;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+#image {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+#button-container {
+  position: absolute;
+  bottom: 15px; /* 마진 값만큼 조정 */
+  left: calc(17vh + 45px); /* 마진 값만큼 조정 */
+  right: 30px; /* 마진 값만큼 조정 */
+  z-index: 2;
+  display: flex;
+  gap: 15px;
+  justify-content: space-between;
+}
+
+.button {
+  padding: 10px 20px;
+  height: 60px;
+  font-size: 16px;
+  background-color: #4285F4;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  flex: 1;
+}
+
+#text-container {
+  position: absolute;
+  bottom: 90px; /* 마진 값만큼 조정 */
+  top: calc(62vh - 19px); /* 마진 값만큼 조정 */
+  left: calc(17vh + 45px); /* 마진 값만큼 조정 */
+  right: 30px; /* 마진 값만큼 조정 */
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  z-index: 3;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.location_description {
+  font-size: 16px;
+}
+
   </style>
 </head>
 <body>
@@ -112,21 +147,24 @@
     <div id="image-container">
       <img src="0.jpg" alt="Image" id="image">
     </div>
-    <div class="controls">
+    <div id="controls">
       <div class="joystick" id="joystick">
         <div class="joystick-handle" id="joystick-handle"></div>
       </div>
+    </div>
+    <div id="text-container">
+      <div class="title" id="ttt">장소 이름</div>
+      <div id="location-description">여기에 장소에 대한 설명을 추가하세요.</div>
     </div>
     <div id="button-container">
       <button id="nearest-restroom-button" class="button">화장실</button>
       <button id="nearest-info-button" class="button">인포메이션 센터</button>
     </div>
   </div>
-
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSJKsuQDaisL61lCY3HBnG2X0RKBIjpa0&libraries=geometry&callback=initMap" async defer></script>
   <script>
     let map;
-    const speed = 0.00000003;
+    const speed = 0.0000001;
     let direction = { x: 0, y: 0 };
     let dragging = false;
     let arrowMarker;
@@ -134,7 +172,7 @@
     let lastArrowPosition = null;
     const markers = [];
     const imageContainer = document.getElementById('image-container');
-    let lastActiveMarker = null; // 마지막으로 활성화된 마커를 추적하기 위한 변수
+    let lastActiveMarker = null;
 
     const markerImages = {
       '입구': '입구.jpg',
@@ -155,6 +193,26 @@
       '중앙사': '중앙사.png',
       '인포메이션센터': '인포.png'
     };
+    const markerDescriptions = {
+      '입구': '무인 발권기가 바로 옆에 있으며, 통로가 매우 좊은 편입니다. 입구로 들어 가신 후에 오른쪽을 바라보시면 유인 매표소도 있으니 참고하시기를 바랍니다.',
+      '역사관 경사로': '해당 건물의 경사로는 완만한 편이오나, 노면 상태가 아주 양호한 편은 아니므로 조심하면서 입장 하시기를 바랍니다.',
+      '형무소 역사관 정면': '형무소 역사관 건물 바로 앞 지점입니다. 해당 기점을 기준으로 왼쪽으로 직진하면 출구가, 오른쪽으로 직진 하면 여옥사가 나오는 점 참고하시길 바랍니다.',
+      '형무소 역사관': '해당 건물은 항일운동의 역사와 여러 독립운동가 분들의 업적을 볼 수 있는 역사관입니다. 하지만 현재 역사관 내부에는 엘리베이터가 없으며, 건물 내부에는 3층까지 모두 계단으로만 이루어져 있는 점 참고하시길 바랍니다.',
+      '형무소 중앙사 옆 경사로': '9,10,11,12동, 총 4동의 옥사 건물이 연결되어 있는 가운데 부분을 가리키는 부분입니다. 해당 건물에는 중앙사 건물 입구의 왼쪽 끝 부분에 경사로가 위치해 있으며, 현재는 9동과 11동만 관람이 가능합니다.',
+      '형무소 공장 터전 건물': '형무소에서 여러 독립운동가 분들이 가혹한 고문과 함께 가혹한 노동을 당했던 공장 부분입니다. 공장의 부지는 원래 현재에 비하여 매우 방대했으나, 현재는 보고 계신 부분만 남아있게 되었습니다. 해당 건물의 입구에는 경사로와 일반 계단이 함께 존재하며, 나오실 때에는 입구로 다시 나오시면 됩니다.',
+      '사형장 건물': '여러 독립운동가 분들의 넋이 스러져 간 형장의 건물입니다. 해당 입구와 출구는 매우 좁은 편이며, 노면 상태도 불량하오니, 휠체어 이용에 각별히 유념하시길 바랍니다.',
+      '격벽장': '예전 여러 독립운동가 분들이 운동 및 야외 활동을 할 때 서로 간의 소통을 차단하고 감시하기 위하여 만들어 놓은 공간입니다. 입구와 출구가 매우 좁은 편이며, 노면 상태도 매우 불량합니다. 또한 격벽장 내부도 굉장히 협소하므로 관람에 있어 유의 하시길 바랍니다.',
+      '창고 건물': '과거 형무소 내의 의무대와 창고의 부지가 같이 있던 공간입니다. 해당 건물은 최신화 되면서 입구에 경사로와 함께 자동문이 설치 되어 있고, 내부에는 별도의 휴식공간도 있습니다. 하지만 관람실 내부는 생각보다 좁은 편이므로 주의 하시길 바랍니다.',
+      '출구': '서대문 형무소 관람 입구를 기준으로 왼쪽 끝 부분에 있습니다. 해당 출구는 통로가 매우 협소하오니 통행에 있어 주의하시길 바랍니다.',
+      '화장실': '경사로가 존재하며, 장애인 화장실도 모두 구비되어 있습니다.',
+      '태극기 포토존': '형무소 건물 외벽에 붙어있는 대형 태극기와 함께 심금을 울리는 명사진이 나오는 공간입니다. 단 노면의 상태는 별로 좋지 못하므로 사진 촬영에 있어 유의하시길 바랍니다.',
+      '태극기': '역사관 바로 뒷 건물의 외벽에 설치되어있습니다. 태극기에 가까이 다가시게 되면 생각보다 많이 미끄럽고 험한 노면 상태에 다치실수도 있사오니 주의하시길 바랍니다.',
+      '한센병사': '과거 투옥된 분들 중 한센병(나병)이 있으셨던 분들이 투옥되었던 별도의 공간입니다. 현재 해당 건물은 휠체어 이용자 분들을 위한 경사로나 엘리베이터가 모두 없으므로 관람에 있어 참고 하시길  바랍니다.',
+      '여옥사': ' 형무소 역사관 정면 기준 바로 왼쪽에 있는 건물입니다. 과거 유관순 열사를 비롯하여 여러 여 독립운동가 분들이 투옥되었던 공간이자, 역사를 알리는 관람관입니다. 해당 건물은 현재 경사로가 없는 상태이므로, 관람에 있어 참고하시길 바랍니다.',
+      '중앙사': '총 4동의 형무소 옥사가 중앙사를 기준으로 붙어있는 형태이며, 9동만 따로 떨어져있습니다. 해당 옥사와 중앙사 건물은 입구 바로 옆에 있는 경사로가 한개 이므로 참고 하시길 바랍니다.',
+      '인포메이션센터': '입구에서 유인 매표소 바로 옆에 위치해 있으며, 관람관의 운영시간이나 화장실 유무 등 기본적인 여러 정보들을 모두 제공 받을 수 있습니다.'
+    };
+
 
     function initMap() {
       const mapOptions = {
@@ -170,31 +228,32 @@
       });
 
       const locations = [
-        { lat: 37.5746538, lng: 126.9566164, label: '입구' },
-        { lat: 37.5745370, lng: 126.9564227, label: '형무소 역사관 정면' },
-        { lat: 37.5744822, lng: 126.9561700, label: '역사관 경사로' },
-        { lat: 37.5744923, lng: 126.9563308, label: '형무소 역사관' }, 
-        { lat: 37.5743955, lng: 126.9559277, label: '형무소 중앙사 옆 경사로' },
-        { lat: 37.5745451, lng: 126.9549719, label: '형무소 공장 터전 건물' },
-        { lat: 37.5733440, lng: 126.9559948, label: '사형장 건물' },
-        { lat: 37.5739065, lng: 126.9561698, label: '격벽장' },
-        { lat: 37.5741476, lng: 126.9565644, label: '창고 건물' },
-        { lat: 37.5752094, lng: 126.9560686, label: '출구' },
-        { lat: 37.5750625, lng: 126.9556092, label: '화장실' },
-        { lat: 37.5743176, lng: 126.9556381, label: '태극기 포토존' },
-        { lat: 37.5741563, lng: 126.9557903, label: '태극기'},
-        { lat: 37.5740027, lng: 126.9553199, label: '한센병사'},
-        { lat: 37.5743477, lng: 126.9568085, label: '여옥사'},
-        { lat: 37.5745430, lng: 126.9558812, label: '중앙사' },
-        { lat: 37.5746748, lng: 126.9565189, label: '인포메이션센터'}
+        { lat: 37.5746538, lng: 126.9566164, label: '입구', description: '입구에 대한 설명입니다.' },
+        { lat: 37.5745370, lng: 126.9564227, label: '형무소 역사관 정면', description: '형무소 역사관 정면에 대한 설명입니다.' },
+        { lat: 37.5744822, lng: 126.9561700, label: '역사관 경사로', description: '역사관 경사로에 대한 설명입니다.' },
+        { lat: 37.5744923, lng: 126.9563308, label: '형무소 역사관', description: '형무소 역사관에 대한 설명입니다.' },
+        { lat: 37.5743955, lng: 126.9559277, label: '형무소 중앙사 옆 경사로', description: '형무소 중앙사 옆 경사로에 대한 설명입니다.' },
+        { lat: 37.5745451, lng: 126.9549719, label: '형무소 공장 터전 건물', description: '형무소 공장 터전 건물에 대한 설명입니다.' },
+        { lat: 37.5733440, lng: 126.9559948, label: '사형장 건물', description: '사형장 건물에 대한 설명입니다.' },
+        { lat: 37.5739065, lng: 126.9561698, label: '격벽장', description: '격벽장에 대한 설명입니다.' },
+        { lat: 37.5741476, lng: 126.9565644, label: '창고 건물', description: '창고 건물에 대한 설명입니다.' },
+        { lat: 37.5752094, lng: 126.9560686, label: '출구', description: '출구에 대한 설명입니다.' },
+        { lat: 37.5750625, lng: 126.9556092, label: '화장실', description: '화장실에 대한 설명입니다.' },
+        { lat: 37.5743176, lng: 126.9556381, label: '태극기 포토존', description: '태극기 포토존에 대한 설명입니다.' },
+        { lat: 37.5741563, lng: 126.9557903, label: '태극기', description: '태극기에 대한 설명입니다.' },
+        { lat: 37.5740027, lng: 126.9553199, label: '한센병사', description: '한센병사에 대한 설명입니다.' },
+        { lat: 37.5743477, lng: 126.9568085, label: '여옥사', description: '여옥사에 대한 설명입니다.' },
+        { lat: 37.5745430, lng: 126.9558812, label: '중앙사', description: '중앙사에 대한 설명입니다.' },
+        { lat: 37.5746748, lng: 126.9565189, label: '인포메이션센터', description: '인포메이션센터에 대한 설명입니다.' }
       ];
+
       const pathCoordinates = [
         { lat: 37.5746538, lng: 126.9566164 },
         { lat: 37.5745370, lng: 126.9564227 },
         { lat: 37.5746613, lng: 126.9562988 },
         { lat: 37.5745327, lng: 126.9561171 },
         { lat: 37.5744822, lng: 126.9561700 },
-        { lat: 37.5744923, lng: 126.9563308 }, 
+        { lat: 37.5744923, lng: 126.9563308 },
         { lat: 37.5744822, lng: 126.9561700 },
         { lat: 37.5744576, lng: 126.9561124 },
         { lat: 37.5743636, lng: 126.9559605 },
@@ -256,12 +315,11 @@
             scaledSize: new google.maps.Size(markerWidth, 70),
             anchor: new google.maps.Point(markerWidth / 2, 50)
           },
-          title: location.label, // Change from `label` to `title` to avoid displaying the label on the map
-          isActive: false // 추가된 속성
+          title: location.label,
+          isActive: false
         });
         marker.addListener('click', () => {
           if (marker.isActive) {
-            // 마커가 활성화된 상태에서 다시 클릭하면 비활성화
             marker.setIcon({
               url: iconUrl,
               scaledSize: new google.maps.Size(30, 30),
@@ -269,12 +327,10 @@
             });
             marker.isActive = false;
             if (lastActiveMarker === marker) {
-              lastActiveMarker = null; // 마지막으로 활성화된 마커가 클릭된 마커일 경우 초기화
+              lastActiveMarker = null;
             }
           } else {
-            // 마커가 비활성화된 상태에서 클릭하면 활성화
             if (lastActiveMarker) {
-              // 이전 활성화된 마커가 있으면 비활성화
               lastActiveMarker.setIcon({
                 url: lastActiveMarker.customIcon.url,
                 scaledSize: new google.maps.Size(30, 30),
@@ -284,8 +340,7 @@
             }
             marker.setIcon(marker.customIcon);
             marker.isActive = true;
-            lastActiveMarker = marker; // 마지막으로 활성화된 마커로 업데이트
-            // 화살표 위치는 유지하고, 마커 클릭 시 지도만 부드럽게 이동
+            lastActiveMarker = marker;
             smoothPanTo(marker.getPosition());
           }
           updateMarkersVisibility();
@@ -296,25 +351,24 @@
 
       map.addListener('click', (e) => {
         const clickedLatLng = e.latLng;
-        arrowMarker.setIcon(null); // 화살표 숨기기
+        arrowMarker.setIcon(null);
         setMapCenterSmooth(clickedLatLng, () => {
-          // 클릭한 위치로 화면 중앙 이동 후 콜백 호출
-          arrowMarker.setIcon(createRotatingIcon(lastAngle)); // 화살표 보이기
+          arrowMarker.setIcon(createRotatingIcon(lastAngle));
           lastArrowPosition = clickedLatLng;
         });
       });
-      
+
       const joystick = document.getElementById('joystick');
       const handle = document.getElementById('joystick-handle');
 
       ['mousedown', 'touchstart'].forEach(event => {
         joystick.addEventListener(event, (e) => {
-          e.preventDefault(); // 기본 동작 방지
+          e.preventDefault();
           const currentCenter = map.getCenter();
           if (lastArrowPosition && !currentCenter.equals(lastArrowPosition)) {
-            dragging = false; // 드래깅 일시 중지
+            dragging = false;
             setMapCenterSmooth(lastArrowPosition, () => {
-              dragging = true; // 드래깅 다시 시작
+              dragging = true;
               animate();
             });
           } else {
@@ -342,7 +396,6 @@
       });
 
       document.getElementById('nearest-restroom-button').addEventListener('click', () => {
-        // "화장실" 마커를 찾아 클릭 이벤트를 트리거하는 부분
         const restroomMarker = markers.find(marker => marker.getTitle() === '화장실');
         if (restroomMarker) {
           google.maps.event.trigger(restroomMarker, 'click');
@@ -350,7 +403,6 @@
       });
 
       document.getElementById('nearest-info-button').addEventListener('click', () => {
-        // "인포메이션센터" 마커를 찾아 클릭 이벤트를 트리거하는 부분
         const infoMarker = markers.find(marker => marker.getTitle() === '인포메이션센터');
         if (infoMarker) {
           google.maps.event.trigger(infoMarker, 'click');
@@ -360,7 +412,6 @@
       updateCoordinates();
       map.addListener('center_changed', updateCoordinates);
 
-      // 지도 초기화 후 마커 가시성 업데이트
       updateMarkersVisibility();
     }
 
@@ -436,12 +487,11 @@
     function setMapCenterSmooth(latLng, callback) {
       const startPos = map.getCenter();
       if (startPos.equals(latLng)) {
-        // 화면 중앙이 이미 화살표 위치와 동일한 경우 바로 콜백 호출
         if (callback) callback();
         return;
       }
       
-      const duration = 400; // 0.5 second for smooth animation
+      const duration = 400;
       const startTime = performance.now();
 
       function animateMove(timestamp) {
@@ -456,8 +506,8 @@
         if (progress < 1) {
           requestAnimationFrame(animateMove);
         } else {
-          lastArrowPosition = newPos; // 최종 위치 저장
-          arrowMarker.setPosition(newPos); // 최종 위치에서 화살표 보이기
+          lastArrowPosition = newPos;
+          arrowMarker.setPosition(newPos);
           if (callback) callback();
         }
       }
@@ -467,7 +517,7 @@
 
     function smoothPanTo(latLng) {
       const startPos = map.getCenter();
-      const duration = 300; // 0.5 second for smooth animation
+      const duration = 300;
       const startTime = performance.now();
 
       function animateMove(timestamp) {
@@ -496,7 +546,6 @@
         const lngChange = direction.x * speed;
         const newCenter = { lat: lat - latChange, lng: lng + lngChange };
 
-        // Directly set the map center for joystick movement
         map.setCenter(newCenter);
         arrowMarker.setPosition(new google.maps.LatLng(newCenter.lat, newCenter.lng));
         lastArrowPosition = new google.maps.LatLng(newCenter.lat, newCenter.lng);
@@ -519,78 +568,101 @@
     }
 
     function updateMarkersVisibility() {
-  const arrowPosition = arrowMarker.getPosition();
-  const mapCenter = map.getCenter(); // 화면 중앙의 좌표 가져오기
-  let imageDisplayed = false;
-  const isLandscape = window.innerWidth > window.innerHeight;
+      const arrowPosition = arrowMarker.getPosition();
+      const mapCenter = map.getCenter();
+      let imageDisplayed = false;
+      let closestMarker = null;
+      let minDistance = Infinity;
 
-  let closestMarker = null;
-  let minDistance = Infinity;
+      markers.forEach(marker => {
+        const distanceToArrow = google.maps.geometry.spherical.computeDistanceBetween(arrowPosition, marker.getPosition());
+        const distanceToCenter = google.maps.geometry.spherical.computeDistanceBetween(mapCenter, marker.getPosition());
 
-  markers.forEach(marker => {
-    const distanceToArrow = google.maps.geometry.spherical.computeDistanceBetween(arrowPosition, marker.getPosition());
-    const distanceToCenter = google.maps.geometry.spherical.computeDistanceBetween(mapCenter, marker.getPosition()); // 화면 중앙까지의 거리 계산
+        if (distanceToArrow <= 10 || distanceToCenter <= 10 || marker.isActive) {
+          if (distanceToArrow <= 10 || distanceToCenter <= 10) {
+            if (distanceToArrow < minDistance) {
+              minDistance = distanceToArrow;
+              closestMarker = marker;
+            }
+          }
 
-    if (distanceToArrow <= 10 || distanceToCenter <= 10 || marker.isActive) {
-      if (distanceToArrow <= 10 || distanceToCenter <= 10) {
-        if (distanceToArrow < minDistance) {
-          minDistance = distanceToArrow;
-          closestMarker = marker;
+          const markerWidth = calculateMarkerWidth(marker.getTitle());
+          marker.setIcon({
+            url: marker.customIcon.url.replace('#4285F4', '#00FF00'),
+            scaledSize: new google.maps.Size(markerWidth, 70),
+            anchor: new google.maps.Point(markerWidth / 2, 50)
+          });
+        } else {
+          const markerWidth = calculateMarkerWidth(marker.getTitle());
+          const iconUrl = (marker.getPosition().lat() === 37.5740027 && marker.getPosition().lng() === 126.9553199) || (marker.getPosition().lat() === 37.5743477 && marker.getPosition().lng() === 126.9568085) ? 'point2.png' : 'point.png';
+          marker.setIcon({
+            url: iconUrl,
+            scaledSize: new google.maps.Size(30, 30),
+            anchor: new google.maps.Point(15, 15)
+          });
+          marker.isActive = false;
+        }
+      });
+
+      const markerToDisplay = closestMarker || lastActiveMarker;
+      if (markerToDisplay) {
+        const label = markerToDisplay.getTitle();
+        if (markerImages[label]) {
+          document.getElementById('image').src = markerImages[label];
+          document.getElementById('location-description').textContent = markerDescriptions[label]; // description을 업데이트
+          document.getElementById('ttt').textContent = label;
+          imageContainer.style.display = 'block';
+          imageDisplayed = true;
         }
       }
 
-      const markerWidth = calculateMarkerWidth(marker.getTitle());
-      // 활성화된 마커의 아이콘을 녹색 배경으로 변경하고 크기 증가
-      const markerSize = marker.isActive ? 40 : 30;
-      marker.setIcon({
-        url: marker.customIcon.url.replace('#4285F4', '#00FF00'),
-        scaledSize: new google.maps.Size(markerWidth, 70),
-        anchor: new google.maps.Point(markerWidth / 2, 50)
-      });
-    } else {
-      const markerWidth = calculateMarkerWidth(marker.getTitle());
-      const iconUrl = (marker.getPosition().lat() === 37.5740027 && marker.getPosition().lng() === 126.9553199) || (marker.getPosition().lat() === 37.5743477 && marker.getPosition().lng() === 126.9568085) ? 'point2.png' : 'point.png';
-      marker.setIcon({
-        url: iconUrl,
-        scaledSize: new google.maps.Size(30, 30),
-        anchor: new google.maps.Point(15, 15)
-      });
-      marker.isActive = false; // 마커 비활성화
+      if (!imageDisplayed) {
+        imageContainer.style.display = 'none';
+      }
     }
-  });
 
-  // 가장 가까운 마커가 있을 때, 혹은 활성화된 마커가 있을 때 사진을 표시
-  const markerToDisplay = closestMarker || lastActiveMarker;
-  if (markerToDisplay) {
-    const label = markerToDisplay.getTitle();
-    if (markerImages[label]) {
-      document.getElementById('image').src = markerImages[label];
+    window.addEventListener('resize', updateJoystickPosition);
+
+    function updateJoystickPosition() {
+      const isLandscape = window.innerWidth > window.innerHeight;
+      const controls = document.getElementById('controls');
+      const textContainer = document.getElementById('text-container');
+      const buttonSpace = document.getElementById('button-container');
+      
       if (isLandscape) {
         imageContainer.style.width = '37vh';
         imageContainer.style.height = '37vh';
         imageContainer.style.bottom = '15px';
-        imageContainer.style.left = '21vh';
+        imageContainer.style.left = '15px';
         imageContainer.style.top = 'auto';
         imageContainer.style.right = '20px';
+        controls.style.width = '37vh';
+        controls.style.height = '37vh';
+        
+        textContainer.style.left = '40vh';
+        textContainer.style.right = '40vh';
+        buttonSpace.style.left = '40vh';
+        buttonSpace.style.right = '40vh';
+        controls.style.left = 'auto';
+        controls.style.right = '15px';
       } else {
+        controls.style.left = '15px';
         imageContainer.style.width = '17vh';
         imageContainer.style.height = '17vh';
         imageContainer.style.bottom = '21vh';
         imageContainer.style.left = '15px';
         imageContainer.style.top = 'auto';
         imageContainer.style.right = 'auto';
+        controls.style.width = '17vh';
+        controls.style.height = '17vh';
+        textContainer.style.left = 'calc(17vh + 30px)';
+        textContainer.style.right = '15px';
+        buttonSpace.style.left = 'calc(17vh + 30px)'; 
+        buttonSpace.style.right = '15px';
       }
-      imageContainer.style.display = 'block';
-      imageDisplayed = true;
     }
-  }
 
-  // 화면 중앙에 더 이상 마커가 없을 때 이미지 숨기기
-  if (!imageDisplayed) {
-    imageContainer.style.display = 'none';
-  }
-}
-
+    updateJoystickPosition();
   </script>
 </body>
 </html>
