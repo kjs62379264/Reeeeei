@@ -3,6 +3,8 @@ import '../../App.css'
 
 export default function Mappings() {
   return (
-    <h1 className='mappings'>Mappings</h1>
+    <div>
+      <iframe src="index2.html" style={{ width: '100%', height: '100vh', border: 'none' }} />
+    </div>
   )
 }
