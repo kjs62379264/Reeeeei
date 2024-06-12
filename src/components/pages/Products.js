@@ -13,24 +13,41 @@ const MapComponent = () => {
   const [originCoords, setOriginCoords] = useState(null);
   const [destinationCoords, setDestinationCoords] = useState(null);
   const [duration, setDuration] = useState('');
+  const [recentSearches, setRecentSearches] = useState([]);
 
   const fetchDirections = () => {
-    const directionsService = new window.google.maps.DirectionsService();
-    directionsService.route({
-      origin: origin,
-      destination: destination,
-      travelMode: window.google.maps.TravelMode.TRANSIT
-    }, (result, status) => {
-      if (status === window.google.maps.DirectionsStatus.OK) {
-        setDirectionsResponse(result);
-        mapRef.current.fitBounds(result.routes[0].bounds);
-        setOriginCoords(result.routes[0].legs[0].start_location);
-        setDestinationCoords(result.routes[0].legs[0].end_location);
-        setDuration(result.routes[0].legs[0].duration.text);
-      } else {
-        console.error(`Error fetching directions ${status}`);
-      }
-    });
+    if (origin && destination) {
+      const directionsService = new window.google.maps.DirectionsService();
+      directionsService.route({
+        origin: origin,
+        destination: destination,
+        travelMode: window.google.maps.TravelMode.TRANSIT
+      }, (result, status) => {
+        if (status === window.google.maps.DirectionsStatus.OK) {
+          setDirectionsResponse(result);
+          mapRef.current.fitBounds(result.routes[0].bounds);
+          setOriginCoords(result.routes[0].legs[0].start_location);
+          setDestinationCoords(result.routes[0].legs[0].end_location);
+          setDuration(result.routes[0].legs[0].duration.text);
+          setRecentSearches(prev => {
+            const newSearches = [`${origin} -> ${destination}`, ...prev];
+            if (newSearches.length > 5) {
+              newSearches.pop(); // 가장 오래된 기록 제거
+            }
+            return newSearches;
+          });
+        } else {
+          console.error(`Error fetching directions ${status}`);
+        }
+      });
+    }
+  };
+
+  const handlePlaceSelect = (ref, setFunction) => {
+    const place = ref.current.getPlace();
+    if (place && place.formatted_address) {
+      setFunction(place.formatted_address);
+    }
   };
 
   return (
@@ -41,16 +58,11 @@ const MapComponent = () => {
       <div className='container'>
         <div className='left-panel'>
           <div className='input-container'>
+            <h3 className='section-title'>경로 찾기</h3>
             <div className="input-group">
               <Autocomplete
                 onLoad={autocomplete => originRef.current = autocomplete}
-                onPlaceChanged={() => {
-                  if (originRef.current && originRef.current.getPlace()) {
-                    const place = originRef.current.getPlace();
-                    setOrigin(place.formatted_address);
-                    setOriginCoords(place.geometry.location);
-                  }
-                }}
+                onPlaceChanged={() => handlePlaceSelect(originRef, setOrigin)}
               >
                 <input
                   type="text"
@@ -59,18 +71,11 @@ const MapComponent = () => {
                   onChange={(e) => setOrigin(e.target.value)}
                 />
               </Autocomplete>
-              <button className='mapbutton' onClick={fetchDirections}>경로 탐색</button>
             </div>
             <div className="input-group">
               <Autocomplete
                 onLoad={autocomplete => destinationRef.current = autocomplete}
-                onPlaceChanged={() => {
-                  if (destinationRef.current && destinationRef.current.getPlace()) {
-                    const place = destinationRef.current.getPlace();
-                    setDestination(place.formatted_address);
-                    setDestinationCoords(place.geometry.location);
-                  }
-                }}
+                onPlaceChanged={() => handlePlaceSelect(destinationRef, setDestination)}
               >
                 <input
                   type="text"
@@ -80,7 +85,16 @@ const MapComponent = () => {
                 />
               </Autocomplete>
             </div>
+            <button className='mapbutton' onClick={fetchDirections}>경로 탐색</button>
             {duration && <div className="duration">예상 소요시간: {duration}</div>}
+          </div>
+          <div className='recent-searches'>
+            <h3>최근 검색 기록</h3>
+            <ul>
+              {recentSearches.map((search, index) => (
+                <li key={index}>{search}</li>
+              ))}
+            </ul>
           </div>
         </div>
         <div className='right-panel'>
@@ -116,8 +130,8 @@ const MapComponent = () => {
                       strokeColor: "#FF0000",
                       strokeOpacity: 0.8,
                       strokeWeight: 6,
-                  }
-                }}
+                    }
+                  }}
                 />
               )}
             </GoogleMap>
